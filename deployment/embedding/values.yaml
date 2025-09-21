@@ -1,0 +1,33 @@
+namespace: embedding-model
+
+deployment:
+      name: text-vectorizer
+      replicas: 1
+      labels:
+          appName: text-vectorizer
+
+      container:
+          name: text-vectorizer
+          port: 5000
+          image: 
+              name: baoduy3/rag_embedding
+              version: v0.1
+              imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+                memory: 1.5Gi
+                cpu: 200m
+            limits:
+                memory: 8Gi
+                cpu: 2
+
+service:
+    name: embed-model-service
+    type: ClusterIP 
+    Map_ports:
+        port: 5000
+        targetPort: 5000
+
+
+
+        
